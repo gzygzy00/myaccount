@@ -6,41 +6,72 @@ import {
   Link,
   Redirect
 } from 'react-router-dom';
+import 'index.scss';
+import styled from 'styled-components';
+
+const Wrapper = styled.div`
+  border: 1px solid red;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+`;
+
+const Main = styled.div`
+  border: 1px solid green;
+  flex-grow: 1;
+`;
+
+const Nav = styled.nav`
+  border: 1px solid blue;
+
+  > ul {
+    display: flex;
+
+    > li {
+      width: 33.33%;
+      text-align: center;
+      padding: 16px;
+    }
+  }
+`;
 
 function App() {
   return (
     <Router>
-      <div>
-        <nav>
-          <ul>
-            <li>
-              <Link to="/money">记账页</Link>
-            </li>
-            <li>
-              <Link to="/tags">标签页</Link>
-            </li>
-            <li>
-              <Link to="/statistics">统计页</Link>
-            </li>
-          </ul>
-        </nav>
-
-        <Switch>
-          <Route path="/money">
-            <Money/>
-          </Route>
-          <Route path="/tags">
-            <Tags/>
-          </Route>
-          <Route path="/statistics">
-            <Statistics/>
-          </Route>
-          <Redirect exact from="/" to="/money"/>
-          <Route path="*">
-            <NoMatch/>
-          </Route>
-        </Switch>
-      </div>
+      <Wrapper>
+        <Main>
+          <Switch>
+            <Route path="/money">
+              <Money/>
+            </Route>
+            <Route path="/tags">
+              <Tags/>
+            </Route>
+            <Route path="/statistics">
+              <Statistics/>
+            </Route>
+            <Redirect exact from="/" to="/money"/>
+            <Route path="*">
+              <NoMatch/>
+            </Route>
+          </Switch>
+        </Main>
+        <div>
+          <Nav>
+            <ul>
+              <li>
+                <Link to="/money">记账页</Link>
+              </li>
+              <li>
+                <Link to="/tags">标签页</Link>
+              </li>
+              <li>
+                <Link to="/statistics">统计页</Link>
+              </li>
+            </ul>
+          </Nav>
+        </div>
+      </Wrapper>
     </Router>
   );
 }
